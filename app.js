@@ -17,9 +17,6 @@ function colorGen() {
         red = rc();
         blue = rc();
         green = rc();
-        console.log(red + 'red');
-        console.log(green + 'green');
-
         $(display[i]).css('background-color', `rgb(${red},${green},${blue})`);
         color.push(`rgb(${red}, ${green}, ${blue})`);
     }
@@ -39,12 +36,17 @@ $('#reset').click(function () {
     winColor = diplayWinner();
     $(display).prop('disabled', false);
     $(display).hide();
-    $(display).fadeIn(1000);
+    $(display).fadeIn(2000);
     counter = 0;
     gameFlag = true;
 });
 $(display).click(function () {
-
+    counter++;
+    if (counter > 2) {
+        $('#winner').text('You Lose');
+        $(display).prop('disabled', true);
+        gameFlag = false;
+    } 
     if ($(this).hasClass('winner') && gameFlag) {
         $('#winner').text('You Win');
         $(display).css('background-color', color[winColor]);
@@ -52,12 +54,8 @@ $(display).click(function () {
         $(display).prop('disabled', true);
         gameFlag = false;
     }
-    if (counter > 3) {
-        $('#winner').text('You Lose');
-        $(display).prop('disabled', true);
-        gameFlag = false;
-    } else if (!($(this).hasClass('winner')) && gameFlag) {
+    else if (!($(this).hasClass('winner')) && gameFlag) {
         $(this).fadeOut(1000);
-        counter++;
+        console.log(counter)
     }
 });
