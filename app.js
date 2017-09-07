@@ -42,18 +42,17 @@ $('#reset').click(function () {
 });
 $(display).click(function () {
     counter++;
-    if (counter > 2) {
-        $('#winner').text('You Lose');
-        $(display).prop('disabled', true);
-        gameFlag = false;
-    } 
     if ($(this).hasClass('winner') && gameFlag) {
         $('#winner').text('You Win');
         $(display).css('background-color', color[winColor]);
         $(display).fadeIn();
         $(display).prop('disabled', true);
+        return;
+    }  if (counter > 2) {
+        $('#winner').text('You Lose');
+        $(display).prop('disabled', true);
         gameFlag = false;
-    }
+    } 
     else if (!($(this).hasClass('winner')) && gameFlag) {
         $(this).fadeOut(1000);
         console.log(counter)
