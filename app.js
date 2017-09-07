@@ -36,25 +36,27 @@ $('#reset').click(function () {
     winColor = diplayWinner();
     $(display).prop('disabled', false);
     $(display).hide();
-    $(display).fadeIn(2000);
+    $(display).fadeIn(1500);
     counter = 0;
     gameFlag = true;
 });
 $(display).click(function () {
-    counter++;
-    if ($(this).hasClass('winner') && gameFlag) {
+    console.log(counter);
+    if (gameFlag) counter++;
+    if ($(this).hasClass('winner')&& gameFlag) {
         $('#winner').text('You Win');
-        $(display).css('background-color', color[winColor]);
-        $(display).fadeIn();
         $(display).prop('disabled', true);
-        return;
-    }  if (counter > 2) {
+        $(display).css('background-color', color[winColor]);
+        $(display).fadeIn(1500);
+        gameFlag = false;
+    }  if ((counter > 2) && gameFlag) {
         $('#winner').text('You Lose');
         $(display).prop('disabled', true);
         gameFlag = false;
     } 
     else if (!($(this).hasClass('winner')) && gameFlag) {
+        $(this).prop('disabled', true);
         $(this).fadeOut(1000);
-        console.log(counter)
     }
 });
+///unbind something
